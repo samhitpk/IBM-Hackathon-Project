@@ -41,13 +41,13 @@ async def health_check():
     }
 
 # Include API routers
-from app.api import schema
+from app.api import schema, contracts
 
 app.include_router(schema.router, prefix="/api/schema", tags=["schema"])
+app.include_router(contracts.router, prefix="/api", tags=["contracts"])
 
 # TODO: Include additional routers when implemented
-# from app.api import contracts, drift
-# app.include_router(contracts.router, prefix="/api/contracts", tags=["contracts"])
+# from app.api import drift
 # app.include_router(drift.router, prefix="/api/drift", tags=["drift"])
 
 if __name__ == "__main__":

@@ -24,6 +24,7 @@ from app.core.contract_storage import (
 )
 from app.core.contract_formatter import contract_to_markdown
 from app.core.drift_detector import detect_drift
+from app.core.ambiguity_detector import detect_all_ambiguities
 from app.models.contract import (
     DataContract,
     ColumnContract,
@@ -765,7 +766,7 @@ async def _generate_contract_from_schema(
         relationships=relationship_contracts,
         business_rules=[],
         data_quality_rules=[],
-        questions=[],  # Bob will add questions for ambiguities
+        questions=[],  # Will be populated by ambiguity detector
         metadata=metadata,
         row_count=table.row_count,
         data_retention=None,
@@ -773,6 +774,20 @@ async def _generate_contract_from_schema(
         update_frequency=None,
         notes=None
     )
+    
+    # Detect ambiguities and generate questions
+    logger.info(f"Detecting ambiguities for table {table.table_name}...")
+    questions = detect_all_ambiguities(table)
+    contract.questions = questions
+    
+    # Adjust confidence score based on number of questions
+    # More questions = more ambiguity = lower confidence
+    if len(questions) > 0:
+        # Reduce confidence by 5% per question, minimum 40%
+        confidence_reduction = min(len(questions) * 0.05, 0.3)
+        contract.metadata.confidence_score = max(0.4, 0.7 - confidence_reduction)
+    
+    logger.info(f"Generated contract with {len(questions)} questions (confidence: {contract.metadata.confidence_score:.0%})")
     
     return contract
 
