@@ -1,0 +1,332 @@
+{
+  "table_name": "customer",
+  "schema_name": "public",
+  "description": "Table customer",
+  "purpose": "Stores data for customer",
+  "columns": [
+    {
+      "name": "customer_id",
+      "description": "Column customer_id of type INTEGER",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "constraints": [
+        "PRIMARY KEY"
+      ],
+      "default_value": "nextval('\"public\".customer_customer_id_seq1'::regclass)",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "store_id",
+      "description": "Column store_id of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": false,
+      "constraints": [
+        "FOREIGN KEY -> store.store_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "first_name",
+      "description": "Column first_name of type TEXT",
+      "data_type": "TEXT",
+      "nullable": false,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "last_name",
+      "description": "Column last_name of type TEXT",
+      "data_type": "TEXT",
+      "nullable": false,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "email",
+      "description": "Column email of type TEXT",
+      "data_type": "TEXT",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "address_id",
+      "description": "Column address_id of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": false,
+      "constraints": [
+        "FOREIGN KEY -> address.address_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "activebool",
+      "description": "Column activebool of type BOOLEAN",
+      "data_type": "BOOLEAN",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "true",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "create_date",
+      "description": "Column create_date of type DATE",
+      "data_type": "DATE",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "('now'::text)::date",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "last_update",
+      "description": "Column last_update of type TIMESTAMP",
+      "data_type": "TIMESTAMP",
+      "nullable": true,
+      "constraints": [],
+      "default_value": "now()",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "active",
+      "description": "Column active of type INTEGER",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    }
+  ],
+  "primary_keys": [
+    "customer_id"
+  ],
+  "relationships": [
+    {
+      "type": "foreign_key",
+      "column": "address_id",
+      "references_table": "address",
+      "references_column": "address_id",
+      "description": "References address.address_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    },
+    {
+      "type": "foreign_key",
+      "column": "store_id",
+      "references_table": "store",
+      "references_column": "store_id",
+      "description": "References store.store_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    }
+  ],
+  "business_rules": [],
+  "data_quality_rules": [],
+  "questions": [
+    {
+      "question_id": "q_50108bff26e9",
+      "question": "Does 'email' contain sensitive or personal data?",
+      "context": "The column 'email' may contain sensitive information based on its name. Please classify its data sensitivity level.",
+      "suggested_answers": [
+        "Public - no sensitive data",
+        "Internal - company confidential",
+        "PII - personally identifiable information",
+        "Highly Sensitive - requires special protection"
+      ],
+      "answer": "No",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T22:11:11.060368"
+    },
+    {
+      "question_id": "q_f5d0274f4a46",
+      "question": "Does 'address_id' contain sensitive or personal data?",
+      "context": "The column 'address_id' may contain sensitive information based on its name. Please classify its data sensitivity level.",
+      "suggested_answers": [
+        "Public - no sensitive data",
+        "Internal - company confidential",
+        "PII - personally identifiable information",
+        "Highly Sensitive - requires special protection"
+      ],
+      "answer": "yes",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T22:11:11.060391"
+    },
+    {
+      "question_id": "q_6adb0969a1f0",
+      "question": "What is the data retention policy for 'customer'?",
+      "context": "Please specify how long data in 'customer' should be retained and when it should be archived or deleted.",
+      "suggested_answers": [
+        "Retain indefinitely",
+        "Retain for specific period (specify duration)",
+        "Archive after specific period",
+        "Delete after specific period"
+      ],
+      "answer": "Keep them for 6 months before archiving",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T22:11:11.060401"
+    },
+    {
+      "question_id": "q_335f20d7a29b",
+      "question": "What validation rules should apply to 'first_name'?",
+      "context": "The column 'first_name' (type: TEXT) may need validation rules. Please specify any constraints, formats, or acceptable value ranges.",
+      "suggested_answers": [
+        "Specify min/max values or length",
+        "Specify format (e.g., email, phone, date format)",
+        "Specify allowed values or patterns",
+        "No additional validation needed"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "question_id": "q_1cb522aa7e79",
+      "question": "What validation rules should apply to 'last_name'?",
+      "context": "The column 'last_name' (type: TEXT) may need validation rules. Please specify any constraints, formats, or acceptable value ranges.",
+      "suggested_answers": [
+        "Specify min/max values or length",
+        "Specify format (e.g., email, phone, date format)",
+        "Specify allowed values or patterns",
+        "No additional validation needed"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "question_id": "q_05afebbe3ec3",
+      "question": "What validation rules should apply to 'email'?",
+      "context": "The column 'email' (type: TEXT) may need validation rules. Please specify any constraints, formats, or acceptable value ranges.",
+      "suggested_answers": [
+        "Specify min/max values or length",
+        "Specify format (e.g., email, phone, date format)",
+        "Specify allowed values or patterns",
+        "No additional validation needed"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "question_id": "q_d75b257af9aa",
+      "question": "What validation rules should apply to 'active'?",
+      "context": "The column 'active' (type: INTEGER) may need validation rules. Please specify any constraints, formats, or acceptable value ranges.",
+      "suggested_answers": [
+        "Specify min/max values or length",
+        "Specify format (e.g., email, phone, date format)",
+        "Specify allowed values or patterns",
+        "No additional validation needed"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "question_id": "q_1bc303a036d5",
+      "question": "What business relationship does 'address_id' represent?",
+      "context": "The column 'address_id' in table 'customer' references 'address.address_id'. Please describe this relationship in business terms.",
+      "suggested_answers": [
+        "Each customer belongs to one address",
+        "Each customer is associated with a address",
+        "Provide custom business description"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "question_id": "q_0699ede0e183",
+      "question": "What business relationship does 'store_id' represent?",
+      "context": "The column 'store_id' in table 'customer' references 'store.store_id'. Please describe this relationship in business terms.",
+      "suggested_answers": [
+        "Each customer belongs to one store",
+        "Each customer is associated with a store",
+        "Provide custom business description"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    },
+    {
+      "question_id": "q_6d6725b12515",
+      "question": "Are there any date constraints for 'create_date'?",
+      "context": "The date column 'create_date' may have business rules about valid date ranges. Please specify any constraints.",
+      "suggested_answers": [
+        "Must be in the past",
+        "Must be in the future",
+        "Must be within specific date range",
+        "No date constraints"
+      ],
+      "answer": null,
+      "answered_by": null,
+      "answered_at": null
+    }
+  ],
+  "metadata": {
+    "contract_id": "customer_20260502_215349_01300ee7",
+    "version": "1.0",
+    "status": "approved",
+    "created_at": "2026-05-02T21:53:49.723803",
+    "created_by": "MCP Server",
+    "updated_at": "2026-05-02T22:11:11.060457",
+    "updated_by": null,
+    "approved_at": "2026-05-02T22:11:11.060433",
+    "approved_by": "Samhit Kasichainula",
+    "approval_notes": "Approved with 3 answers",
+    "tags": [],
+    "confidence_score": 0.4
+  },
+  "row_count": 599,
+  "data_retention": null,
+  "access_control": null,
+  "update_frequency": null,
+  "data_sources": [],
+  "downstream_systems": [],
+  "notes": null
+}

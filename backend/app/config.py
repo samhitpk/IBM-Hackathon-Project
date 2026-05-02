@@ -3,6 +3,8 @@ Configuration management for DataContractIQ
 """
 from pydantic_settings import BaseSettings
 from typing import List
+from pathlib import Path
+import os
 
 
 class Settings(BaseSettings):
@@ -19,10 +21,10 @@ class Settings(BaseSettings):
     # CORS
     cors_origins: List[str] = ["http://localhost:5173"]
     
-    # File Paths
-    contracts_dir: str = "../data/contracts"
-    snapshots_dir: str = "../data/snapshots"
-    sql_file_path: str = "../GreenCycleBikes/pagila-master/pagila-insert-data.sql"
+    # File Paths - Use absolute paths
+    contracts_dir: str = str(Path(__file__).parent.parent.parent / "data" / "contracts")
+    snapshots_dir: str = str(Path(__file__).parent.parent.parent / "data" / "snapshots")
+    sql_file_path: str = str(Path(__file__).parent.parent.parent / "GreenCycleBikes" / "pagila-master" / "pagila-insert-data.sql")
     
     class Config:
         env_file = ".env"
