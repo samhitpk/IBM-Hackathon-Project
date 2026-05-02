@@ -151,18 +151,20 @@ def update_contract_answers(
 def approve_contract(
     contract_id: str,
     approved_by: str,
-    notes: Optional[str] = None
+    notes: Optional[str] = None,
+    answers: Optional[List[QuestionAnswer]] = None
 ) -> DataContract:
     """
-    Approve a contract and merge AI + human insights.
+    Approve a contract and save answers (simplified MVP version).
     
     Args:
         contract_id: Contract to approve
         approved_by: User approving the contract
         notes: Approval notes
+        answers: Optional question answers to save
         
     Returns:
-        Approved contract with merged insights
+        Approved contract with answers saved
         
     Raises:
         FileNotFoundError: If contract doesn't exist
@@ -171,10 +173,18 @@ def approve_contract(
     contract = storage_load_contract(contract_id)
     
     # MVP: No validation required - questions are optional
-    logger.info(f"Approving contract {contract_id} (questions optional for MVP)")
+    logger.info(f"Approving contract {contract_id} (MVP: questions optional)")
     
-    # Merge AI-generated content with human answers
-    contract = merge_ai_and_human_insights(contract)
+    # Save any provided answers alongside the contract
+    if answers:
+        for answer_data in answers:
+            for question in contract.questions:
+                if question.question_id == answer_data.question_id:
+                    question.answer = answer_data.answer
+                    question.answered_by = answer_data.answered_by
+                    question.answered_at = datetime.utcnow()
+                    break
+        logger.info(f"Saved {len(answers)} answers with contract")
     
     # Update status to approved
     contract.metadata.status = ContractStatus.APPROVED
@@ -193,96 +203,7 @@ def approve_contract(
     return saved_contract
 
 
-def merge_ai_and_human_insights(contract: DataContract) -> DataContract:
-    """
-    Merge AI-extracted technical details with human business context.
-    
-    Args:
-        contract: Contract to enhance
-        
-    Returns:
-        Contract with merged insights
-    """
-    logger.info(f"Merging AI + human insights for contract {contract.metadata.contract_id}")
-    
-    # Process each answered question
-    for question in contract.questions:
-        if not question.answer:
-            continue  # Skip unanswered questions (MVP allows this)
-        
-        question_lower = question.question.lower()
-        
-        # Enhance column descriptions with business context
-        if "represent" in question_lower or "mean" in question_lower:
-            # Find the column mentioned in the question
-            for column in contract.columns:
-                if column.name in question.question:
-                    # Enhance description with human answer
-                    if "Technical:" not in column.description:
-                        original_desc = column.description
-                        column.description = f"{question.answer} (Technical: {original_desc})"
-                    break
-        
-        # Add business rules from answers
-        elif "validation" in question_lower or "range" in question_lower or "constraint" in question_lower:
-            if "no" not in question.answer.lower() and "none" not in question.answer.lower():
-                # Create business rule from answer
-                rule = BusinessRule(
-                    rule_id=f"rule_{question.question_id}",
-                    description=question.answer,
-                    rule_type="validation",
-                    enforcement="application",
-                    sql_expression=None,
-                    examples=[],
-                    exceptions=[]
-                )
-                contract.business_rules.append(rule)
-        
-        # Update data sensitivity
-        elif "sensitive" in question_lower or "pii" in question_lower:
-            # Find column and update sensitivity
-            for column in contract.columns:
-                if column.name in question.question:
-                    column.sensitivity = question.answer
-                    break
-            
-            # Also update table-level access control if it's about overall sensitivity
-            if "overall" in question_lower or "table" in question_lower:
-                contract.access_control = question.answer
-        
-        # Update data retention policy
-        elif "retention" in question_lower:
-            contract.data_retention = question.answer
-        
-        # Enhance relationship descriptions
-        elif "relationship" in question_lower:
-            for rel in contract.relationships:
-                if rel.column in question.question:
-                    # Enhance with business context
-                    if "Technical:" not in rel.description:
-                        original_desc = rel.description
-                        rel.description = f"{question.answer} (Technical: {original_desc})"
-                    break
-        
-        # Add valid values for enum-like columns
-        elif "valid values" in question_lower:
-            for column in contract.columns:
-                if column.name in question.question:
-                    # Parse comma-separated values
-                    if "," in question.answer:
-                        values = [v.strip() for v in question.answer.split(",")]
-                        column.valid_values = values
-                    break
-    
-    # Boost confidence score after merging insights
-    answered_count = sum(1 for q in contract.questions if q.answer)
-    if answered_count > 0:
-        current_score = contract.metadata.confidence_score or 0.7
-        contract.metadata.confidence_score = min(0.95, current_score + 0.1)
-    
-    logger.info(f"Merged {answered_count} answered questions into contract")
-    
-    return contract
+# Removed complex merge logic for MVP - answers are simply saved alongside the contract
 
 
 # Made with Bob

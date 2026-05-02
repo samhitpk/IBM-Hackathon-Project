@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     debug: bool = True
     
     # Database
-    database_url: str = "postgresql://postgres:password@localhost:5432/pagila"
+    database_url: str = "postgresql://sree@localhost:5432/pagila"
     
     # CORS
     cors_origins: List[str] = ["http://localhost:5173"]

@@ -1,0 +1,304 @@
+{
+  "table_name": "rental",
+  "schema_name": "public",
+  "description": "Table rental",
+  "purpose": "Stores data for rental",
+  "columns": [
+    {
+      "name": "rental_id",
+      "description": "Column rental_id of type INTEGER",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "constraints": [
+        "PRIMARY KEY"
+      ],
+      "default_value": "nextval('\"public\".rental_rental_id_seq'::regclass)",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "rental_date",
+      "description": "Column rental_date of type TIMESTAMP",
+      "data_type": "TIMESTAMP",
+      "nullable": false,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "inventory_id",
+      "description": "Column inventory_id of type INTEGER",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "constraints": [
+        "FOREIGN KEY -> inventory.inventory_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "customer_id",
+      "description": "Column customer_id of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": false,
+      "constraints": [
+        "FOREIGN KEY -> customer.customer_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "return_date",
+      "description": "Column return_date of type TIMESTAMP",
+      "data_type": "TIMESTAMP",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "staff_id",
+      "description": "Column staff_id of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": false,
+      "constraints": [
+        "FOREIGN KEY -> staff.staff_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "last_update",
+      "description": "Column last_update of type TIMESTAMP",
+      "data_type": "TIMESTAMP",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "now()",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    }
+  ],
+  "primary_keys": [
+    "rental_id"
+  ],
+  "relationships": [
+    {
+      "type": "FOREIGN_KEY",
+      "column": "customer_id",
+      "references_table": "customer",
+      "references_column": "customer_id",
+      "description": "References customer.customer_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    },
+    {
+      "type": "FOREIGN_KEY",
+      "column": "inventory_id",
+      "references_table": "inventory",
+      "references_column": "inventory_id",
+      "description": "References inventory.inventory_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    },
+    {
+      "type": "FOREIGN_KEY",
+      "column": "staff_id",
+      "references_table": "staff",
+      "references_column": "staff_id",
+      "description": "References staff.staff_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    }
+  ],
+  "business_rules": [],
+  "data_quality_rules": [],
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "What is the data retention policy for 'rental'?",
+      "context": "Please specify how long data in 'rental' should be retained and when it should be archived or deleted.",
+      "suggested_answers": [
+        "Retain indefinitely",
+        "Retain for specific period (specify duration)",
+        "Archive after specific period",
+        "Delete after specific period"
+      ],
+      "answer": "It should be archived after 6 months\n",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108598"
+    },
+    {
+      "question_id": "q2",
+      "question": "What business relationship does 'customer_id' represent?",
+      "context": "The column 'customer_id' in table 'rental' references 'customer.customer_id'. Please describe this relationship in business terms.",
+      "suggested_answers": [
+        "Each rental belongs to one customer",
+        "Each rental is associated with a customer",
+        "Provide custom business description"
+      ],
+      "answer": "These are all the people that have rented from us",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108628"
+    },
+    {
+      "question_id": "q3",
+      "question": "What business relationship does 'inventory_id' represent?",
+      "context": "The column 'inventory_id' in table 'rental' references 'inventory.inventory_id'. Please describe this relationship in business terms.",
+      "suggested_answers": [
+        "Each rental belongs to one inventory",
+        "Each rental is associated with a inventory",
+        "Provide custom business description"
+      ],
+      "answer": "These represent all the movies that we have ",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108653"
+    },
+    {
+      "question_id": "q4",
+      "question": "What business relationship does 'staff_id' represent?",
+      "context": "The column 'staff_id' in table 'rental' references 'staff.staff_id'. Please describe this relationship in business terms.",
+      "suggested_answers": [
+        "Each rental belongs to one staff",
+        "Each rental is associated with a staff",
+        "Provide custom business description"
+      ],
+      "answer": "This represents all the staff that we have",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108670"
+    },
+    {
+      "question_id": "q5",
+      "question": "Are there any date constraints for 'rental_date'?",
+      "context": "The date column 'rental_date' may have business rules about valid date ranges. Please specify any constraints.",
+      "suggested_answers": [
+        "Must be in the past",
+        "Must be in the future",
+        "Must be within specific date range",
+        "No date constraints"
+      ],
+      "answer": "The rental date cannot be in the future",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108683"
+    },
+    {
+      "question_id": "q6",
+      "question": "Are there any date constraints for 'return_date'?",
+      "context": "The date column 'return_date' may have business rules about valid date ranges. Please specify any constraints.",
+      "suggested_answers": [
+        "Must be in the past",
+        "Must be in the future",
+        "Must be within specific date range",
+        "No date constraints"
+      ],
+      "answer": "return date cannot be before rental date",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108696"
+    },
+    {
+      "question_id": "q7",
+      "question": "What does NULL mean for the 'return_date' column?",
+      "context": "The column 'return_date' allows NULL values. Please clarify what NULL represents in business terms (e.g., 'not applicable', 'unknown', 'optional').",
+      "suggested_answers": [
+        "NULL means 'not applicable'",
+        "NULL means 'unknown' or 'not yet provided'",
+        "NULL means 'optional field'",
+        "NULL should not be allowed - add NOT NULL constraint"
+      ],
+      "answer": "It means that it has not been returned yet",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108708"
+    },
+    {
+      "question_id": "q8",
+      "question": "What should happen when the referenced customer is deleted?",
+      "context": "The foreign key 'customer_id' doesn't specify an ON DELETE action. Please clarify the desired behavior.",
+      "suggested_answers": [
+        "CASCADE - delete this record too",
+        "SET NULL - set this field to NULL",
+        "RESTRICT - prevent deletion of referenced record",
+        "NO ACTION - database default behavior"
+      ],
+      "answer": "Set the field to null",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108720"
+    },
+    {
+      "question_id": "q9",
+      "question": "What should happen when the referenced inventory is deleted?",
+      "context": "The foreign key 'inventory_id' doesn't specify an ON DELETE action. Please clarify the desired behavior.",
+      "suggested_answers": [
+        "CASCADE - delete this record too",
+        "SET NULL - set this field to NULL",
+        "RESTRICT - prevent deletion of referenced record",
+        "NO ACTION - database default behavior"
+      ],
+      "answer": "set this field to NULL",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108733"
+    },
+    {
+      "question_id": "q10",
+      "question": "What should happen when the referenced staff is deleted?",
+      "context": "The foreign key 'staff_id' doesn't specify an ON DELETE action. Please clarify the desired behavior.",
+      "suggested_answers": [
+        "CASCADE - delete this record too",
+        "SET NULL - set this field to NULL",
+        "RESTRICT - prevent deletion of referenced record",
+        "NO ACTION - database default behavior"
+      ],
+      "answer": "set this field to NULL",
+      "answered_by": "Samhit Kasichainula",
+      "answered_at": "2026-05-02T18:04:22.108745"
+    }
+  ],
+  "metadata": {
+    "contract_id": "rental_20260502_175432_9aec1d10",
+    "version": "1.0",
+    "status": "approved",
+    "created_at": "2026-05-02T17:54:32",
+    "created_by": "MCP Server",
+    "updated_at": "2026-05-02T18:11:24.291061",
+    "updated_by": null,
+    "approved_at": "2026-05-02T18:11:24.291041",
+    "approved_by": "Samhit Kasichainula",
+    "approval_notes": "Re-approved to update markdown",
+    "tags": [],
+    "confidence_score": 0.4
+  },
+  "row_count": 16044,
+  "data_retention": null,
+  "access_control": null,
+  "update_frequency": null,
+  "data_sources": [],
+  "downstream_systems": [],
+  "notes": null
+}

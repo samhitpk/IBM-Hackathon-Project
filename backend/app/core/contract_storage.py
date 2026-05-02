@@ -16,6 +16,7 @@ from app.models.contract import (
     ContractMetadata
 )
 from app.config import settings
+from app.core.contract_formatter import contract_to_markdown
 
 logger = logging.getLogger(__name__)
 
@@ -78,12 +79,22 @@ class ContractStorage:
         file_path = self._get_contract_path(contract.metadata.contract_id)
         
         try:
+            # Save JSON file
             with open(file_path, 'w', encoding='utf-8') as f:
                 # Convert to JSON using Pydantic's model_dump
                 json_data = contract.model_dump(mode='json')
                 json.dump(json_data, f, indent=2, default=str)
             
-            logger.info(f"Saved contract: {contract.metadata.contract_id} to {file_path}")
+            logger.info(f"Saved contract JSON: {contract.metadata.contract_id} to {file_path}")
+            
+            # Also save Markdown file
+            md_path = file_path.with_suffix('.md')
+            markdown_content = contract_to_markdown(contract)
+            with open(md_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_content)
+            
+            logger.info(f"Saved contract Markdown: {contract.metadata.contract_id} to {md_path}")
+            
             return contract
             
         except Exception as e:

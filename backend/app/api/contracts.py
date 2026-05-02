@@ -14,8 +14,9 @@ from app.api.models import (
     ContractResponse,
     ErrorResponse
 )
-from app.models.contract import DataContract
+from app.models.contract import DataContract, DriftDetectionResponse
 from app.services import contract_service
+from app.services import drift_service
 from app.core.contract_formatter import contract_to_markdown
 
 logger = logging.getLogger(__name__)
@@ -146,12 +147,12 @@ async def submit_answers(contract_id: str, submission: AnswersSubmission):
 @router.post(
     "/contracts/{contract_id}/approve",
     response_model=ContractResponse,
-    summary="Approve contract",
-    description="Approve a contract and merge AI insights with human answers (no validation required for MVP)"
+    summary="Approve contract with answers",
+    description="Approve a contract and save answers in one action (MVP: no validation required)"
 )
 async def approve_contract(contract_id: str, approval: ApprovalRequest):
     """
-    Approve a contract.
+    Approve a contract with optional answers.
     
     Path Parameters:
     - contract_id: Contract to approve
@@ -159,18 +160,19 @@ async def approve_contract(contract_id: str, approval: ApprovalRequest):
     Request Body:
     - approved_by: User approving the contract
     - notes: Optional approval notes
+    - answers: Optional list of question answers
     
     Returns:
     - Success response with contract ID
     
-    Note: For MVP, questions are optional. Users can approve contracts with unanswered questions.
-    The system will merge any answered questions with AI-generated content.
+    Note: For MVP, questions are optional. Answers are saved alongside the contract.
     """
     try:
         approved_contract = contract_service.approve_contract(
             contract_id=contract_id,
             approved_by=approval.approved_by,
-            notes=approval.notes
+            notes=approval.notes,
+            answers=approval.answers
         )
         
         return ContractResponse(
@@ -218,3 +220,49 @@ async def get_contract_stats():
 
 
 # Made with Bob
+
+@router.get(
+    "/drift/{table_name}",
+    response_model=DriftDetectionResponse,
+    summary="Detect schema drift for a table",
+    description="Compare current database schema against approved contract to detect changes"
+)
+async def detect_drift(table_name: str):
+    """
+    Detect schema drift for a specific table.
+    
+    Path Parameters:
+    - table_name: Table to check for drift
+    
+    Returns:
+    - Detailed drift report with all detected changes
+    """
+    try:
+        drift_response = drift_service.detect_drift_for_table(table_name)
+        return drift_response
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error detecting drift for {table_name}: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get(
+    "/drift/summary/all",
+    summary="Get drift summary for all approved contracts",
+    description="Check drift status across all tables with approved contracts"
+)
+async def get_drift_summary():
+    """
+    Get summary of drift status for all monitored tables.
+    
+    Returns:
+    - Summary statistics including tables with drift, change counts by severity
+    """
+    try:
+        summary = drift_service.get_drift_summary()
+        return summary
+    except Exception as e:
+        logger.error(f"Error getting drift summary: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+

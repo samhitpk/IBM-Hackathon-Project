@@ -429,10 +429,16 @@ async def handle_generate_contract(args: Dict[str, Any]) -> list[TextContent]:
         # For now, we create a basic contract structure that Bob can enhance
         contract = await _generate_contract_from_schema(table, include_examples)
         
+        # Auto-save the generated contract to disk (MVP: always save)
+        saved_contract = save_contract(contract)
+        logger.info(f"Auto-saved contract {saved_contract.metadata.contract_id} to disk")
+        
         response = {
             "success": True,
             "table_name": table_name,
-            "contract_id": contract.metadata.contract_id
+            "contract_id": contract.metadata.contract_id,
+            "saved": True,
+            "message": f"Contract generated and saved for table '{table_name}'"
         }
         
         if output_format in ["json", "both"]:

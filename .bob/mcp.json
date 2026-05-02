@@ -1,1 +1,21 @@
-{"mcpServers":{"datacontractiq":{"command":"wsl","args":["/mnt/c/Users/sam20/Documents/IBM Hackathon Project/backend/venv/bin/python","/mnt/c/Users/sam20/Documents/IBM Hackathon Project/backend/mcp_server.py"],"env":{"DATABASE_URL":"postgresql://postgres:password@localhost:5432/pagila","PYTHONPATH":"/mnt/c/Users/sam20/Documents/IBM Hackathon Project/backend"},"alwaysAllow":["introspect_schema","analyze_table","generate_contract","save_contract","list_contracts","detect_drift","compare_schemas"]}}}
+{
+  "mcpServers": {
+    "datacontractiq": {
+      "command": "/Users/sree/IBM-Hackathon-Project/backend/venv/bin/python",
+      "args": ["/Users/sree/IBM-Hackathon-Project/backend/mcp_server.py"],
+      "env": {
+        "DATABASE_URL": "postgresql://sree@localhost:5432/pagila",
+        "PYTHONPATH": "/Users/sree/IBM-Hackathon-Project/backend"
+      },
+      "alwaysAllow": [
+        "introspect_schema",
+        "analyze_table",
+        "generate_contract",
+        "save_contract",
+        "list_contracts",
+        "detect_drift",
+        "compare_schemas"
+      ]
+    }
+  }
+}

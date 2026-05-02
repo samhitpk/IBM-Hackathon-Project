@@ -34,9 +34,10 @@ class AnswersSubmission(BaseModel):
 
 
 class ApprovalRequest(BaseModel):
-    """Request to approve a contract"""
+    """Request to approve a contract with optional answers"""
     approved_by: str = Field(..., description="User approving the contract")
     notes: Optional[str] = Field(None, description="Approval notes")
+    answers: Optional[List[QuestionAnswer]] = Field(None, description="Question answers (optional)")
 
 
 class ContractResponse(BaseModel):
