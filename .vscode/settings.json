@@ -1,0 +1,16 @@
+{
+  "cline.mcpServers": {
+    "datacontractiq": {
+      "command": "/mnt/c/Users/sam20/Documents/IBM Hackathon Project/backend/venv/bin/python",
+      "args": [
+        "/mnt/c/Users/sam20/Documents/IBM Hackathon Project/backend/mcp_server.py"
+      ],
+      "env": {
+        "DATABASE_URL": "postgresql://postgres:password@localhost:5432/pagila",
+        "PYTHONPATH": "/mnt/c/Users/sam20/Documents/IBM Hackathon Project/backend"
+      }
+    }
+  }
+}
+
+// Made with Bob

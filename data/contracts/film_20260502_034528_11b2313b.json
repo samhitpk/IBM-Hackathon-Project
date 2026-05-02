@@ -1,0 +1,245 @@
+{
+  "table_name": "film",
+  "schema_name": "public",
+  "description": "Table film",
+  "purpose": "Stores data for film",
+  "columns": [
+    {
+      "name": "film_id",
+      "description": "Column film_id of type INTEGER",
+      "data_type": "INTEGER",
+      "nullable": false,
+      "constraints": [
+        "PRIMARY KEY"
+      ],
+      "default_value": "nextval('\"public\".film_film_id_seq'::regclass)",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "title",
+      "description": "Column title of type TEXT",
+      "data_type": "TEXT",
+      "nullable": false,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "description",
+      "description": "Column description of type TEXT",
+      "data_type": "TEXT",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "release_year",
+      "description": "Column release_year of type INTEGER",
+      "data_type": "INTEGER",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "language_id",
+      "description": "Column language_id of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": false,
+      "constraints": [
+        "FOREIGN KEY -> language.language_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "original_language_id",
+      "description": "Column original_language_id of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": true,
+      "constraints": [
+        "FOREIGN KEY -> language.language_id"
+      ],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "rental_duration",
+      "description": "Column rental_duration of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "3",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "rental_rate",
+      "description": "Column rental_rate of type NUMERIC(4, 2)",
+      "data_type": "NUMERIC(4, 2)",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "4.99",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "length",
+      "description": "Column length of type SMALLINT",
+      "data_type": "SMALLINT",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "replacement_cost",
+      "description": "Column replacement_cost of type NUMERIC(5, 2)",
+      "data_type": "NUMERIC(5, 2)",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "19.99",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "rating",
+      "description": "Column rating of type VARCHAR(5)",
+      "data_type": "VARCHAR(5)",
+      "nullable": true,
+      "constraints": [],
+      "default_value": "'G'::mpaa_rating",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "last_update",
+      "description": "Column last_update of type TIMESTAMP",
+      "data_type": "TIMESTAMP",
+      "nullable": false,
+      "constraints": [],
+      "default_value": "now()",
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "special_features",
+      "description": "Column special_features of type ARRAY",
+      "data_type": "ARRAY",
+      "nullable": true,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    },
+    {
+      "name": "fulltext",
+      "description": "Column fulltext of type TSVECTOR",
+      "data_type": "TSVECTOR",
+      "nullable": false,
+      "constraints": [],
+      "default_value": null,
+      "business_rules": [],
+      "examples": [],
+      "valid_values": null,
+      "format": null,
+      "sensitivity": null
+    }
+  ],
+  "primary_keys": [
+    "film_id"
+  ],
+  "relationships": [
+    {
+      "type": "foreign_key",
+      "column": "language_id",
+      "references_table": "language",
+      "references_column": "language_id",
+      "description": "References language.language_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    },
+    {
+      "type": "foreign_key",
+      "column": "original_language_id",
+      "references_table": "language",
+      "references_column": "language_id",
+      "description": "References language.language_id",
+      "on_delete": null,
+      "on_update": null,
+      "cardinality": "N:1"
+    }
+  ],
+  "business_rules": [],
+  "data_quality_rules": [],
+  "questions": [],
+  "metadata": {
+    "contract_id": "film_20260502_034528_11b2313b",
+    "version": "1.0",
+    "status": "approved",
+    "created_at": "2026-05-02T03:45:28.742823",
+    "created_by": "MCP Server",
+    "updated_at": "2026-05-02T03:45:51.022094",
+    "updated_by": null,
+    "approved_at": "2026-05-02T03:45:51.022094",
+    "approved_by": "Sam",
+    "approval_notes": "Approved by Sam",
+    "tags": [],
+    "confidence_score": 0.7
+  },
+  "row_count": 1000,
+  "data_retention": null,
+  "access_control": null,
+  "update_frequency": null,
+  "data_sources": [],
+  "downstream_systems": [],
+  "notes": null
+}

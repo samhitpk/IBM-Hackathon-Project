@@ -1,0 +1,2630 @@
+{
+  "snapshot_id": "pagila_20260501_205616_19c48be1",
+  "database_schema": {
+    "database_name": "pagila",
+    "tables": [
+      {
+        "table_name": "film_actor",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "actor_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": true,
+            "foreign_key": "actor.actor_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "film_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": true,
+            "foreign_key": "film.film_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "actor_id",
+          "film_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "actor_id",
+            "referenced_table": "actor",
+            "referenced_column": "actor_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "film_id",
+            "referenced_table": "film",
+            "referenced_column": "film_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_film_id",
+            "columns": [
+              "film_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 5462
+      },
+      {
+        "table_name": "address",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "address_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".address_address_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "address",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "address2",
+            "data_type": "TEXT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "district",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "city_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "city.city_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "postal_code",
+            "data_type": "TEXT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "phone",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "address_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "city_id",
+            "referenced_table": "city",
+            "referenced_column": "city_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_city_id",
+            "columns": [
+              "city_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 603
+      },
+      {
+        "table_name": "city",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "city_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".city_city_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "city",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "country_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "country.country_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "city_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "country_id",
+            "referenced_table": "country",
+            "referenced_column": "country_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_country_id",
+            "columns": [
+              "country_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 600
+      },
+      {
+        "table_name": "actor",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "actor_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".actor_actor_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "first_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "actor_id"
+        ],
+        "foreign_keys": [],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_actor_last_name",
+            "columns": [
+              "last_name"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 200
+      },
+      {
+        "table_name": "category",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "category_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".category_category_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "category_id"
+        ],
+        "foreign_keys": [],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [],
+        "table_comment": null,
+        "row_count": 16
+      },
+      {
+        "table_name": "country",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "country_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".country_country_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "country",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "country_id"
+        ],
+        "foreign_keys": [],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [],
+        "table_comment": null,
+        "row_count": 109
+      },
+      {
+        "table_name": "customer",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "customer_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".customer_customer_id_seq1'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "store_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "store.store_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "first_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "email",
+            "data_type": "TEXT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "address_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "address.address_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "activebool",
+            "data_type": "BOOLEAN",
+            "nullable": false,
+            "default_value": "true",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "create_date",
+            "data_type": "DATE",
+            "nullable": false,
+            "default_value": "('now'::text)::date",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": true,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "active",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "customer_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "address_id",
+            "referenced_table": "address",
+            "referenced_column": "address_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "store_id",
+            "referenced_table": "store",
+            "referenced_column": "store_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_address_id",
+            "columns": [
+              "address_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_store_id",
+            "columns": [
+              "store_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_last_name",
+            "columns": [
+              "last_name"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 599
+      },
+      {
+        "table_name": "film",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "film_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".film_film_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "title",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "description",
+            "data_type": "TEXT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "release_year",
+            "data_type": "INTEGER",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "language_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "language.language_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "original_language_id",
+            "data_type": "SMALLINT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "language.language_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_duration",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": "3",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_rate",
+            "data_type": "NUMERIC(4, 2)",
+            "nullable": false,
+            "default_value": "4.99",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 4,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "length",
+            "data_type": "SMALLINT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "replacement_cost",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": "19.99",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "rating",
+            "data_type": "VARCHAR(5)",
+            "nullable": true,
+            "default_value": "'G'::mpaa_rating",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": 5,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "special_features",
+            "data_type": "ARRAY",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "fulltext",
+            "data_type": "TSVECTOR",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "film_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "language_id",
+            "referenced_table": "language",
+            "referenced_column": "language_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "original_language_id",
+            "referenced_table": "language",
+            "referenced_column": "language_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "film_fulltext_idx",
+            "columns": [
+              "fulltext"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_language_id",
+            "columns": [
+              "language_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_original_language_id",
+            "columns": [
+              "original_language_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_title",
+            "columns": [
+              "title"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 1000
+      },
+      {
+        "table_name": "film_category",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "film_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": true,
+            "foreign_key": "film.film_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "category_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": true,
+            "foreign_key": "category.category_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "film_id",
+          "category_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "category_id",
+            "referenced_table": "category",
+            "referenced_column": "category_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "film_id",
+            "referenced_table": "film",
+            "referenced_column": "film_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [],
+        "table_comment": null,
+        "row_count": 1000
+      },
+      {
+        "table_name": "inventory",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "inventory_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".inventory_inventory_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "film_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "film.film_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "store_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "store.store_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "inventory_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "film_id",
+            "referenced_table": "film",
+            "referenced_column": "film_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "store_id",
+            "referenced_table": "store",
+            "referenced_column": "store_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_store_id_film_id",
+            "columns": [
+              "store_id",
+              "film_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 4581
+      },
+      {
+        "table_name": "language",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "language_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".language_language_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "name",
+            "data_type": "CHAR(20)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": 20,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "language_id"
+        ],
+        "foreign_keys": [],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [],
+        "table_comment": null,
+        "row_count": 6
+      },
+      {
+        "table_name": "payment",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": -1
+      },
+      {
+        "table_name": "payment_p2020_03",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "rental.rental_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "rental_id",
+            "referenced_table": "rental",
+            "referenced_column": "rental_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_payment_p2020_03_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_payment_p2020_03_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "payment_p2020_03_customer_id_idx",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 5644
+      },
+      {
+        "table_name": "payment_p2020_02",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "rental.rental_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "rental_id",
+            "referenced_table": "rental",
+            "referenced_column": "rental_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_payment_p2020_02_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_payment_p2020_02_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "payment_p2020_02_customer_id_idx",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 2312
+      },
+      {
+        "table_name": "payment_p2020_06",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "rental.rental_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "rental_id",
+            "referenced_table": "rental",
+            "referenced_column": "rental_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_payment_p2020_06_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_payment_p2020_06_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "payment_p2020_06_customer_id_idx",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": -1
+      },
+      {
+        "table_name": "rental",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".rental_rental_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "inventory_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "inventory.inventory_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "return_date",
+            "data_type": "TIMESTAMP",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "rental_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "inventory_id",
+            "referenced_table": "inventory",
+            "referenced_column": "inventory_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_inventory_id",
+            "columns": [
+              "inventory_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_unq_rental_rental_date_inventory_id_customer_id",
+            "columns": [
+              "rental_date",
+              "inventory_id",
+              "customer_id"
+            ],
+            "unique": true,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 16044
+      },
+      {
+        "table_name": "payment_p2020_05",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "rental.rental_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "rental_id",
+            "referenced_table": "rental",
+            "referenced_column": "rental_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_payment_p2020_05_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_payment_p2020_05_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "payment_p2020_05_customer_id_idx",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 182
+      },
+      {
+        "table_name": "staff",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "staff_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".staff_staff_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "first_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_name",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "address_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "address.address_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "email",
+            "data_type": "TEXT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "store_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "store.store_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "active",
+            "data_type": "BOOLEAN",
+            "nullable": false,
+            "default_value": "true",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "username",
+            "data_type": "TEXT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "password",
+            "data_type": "TEXT",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "picture",
+            "data_type": "BYTEA",
+            "nullable": true,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "staff_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "address_id",
+            "referenced_table": "address",
+            "referenced_column": "address_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "store_id",
+            "referenced_table": "store",
+            "referenced_column": "store_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [],
+        "table_comment": null,
+        "row_count": 2
+      },
+      {
+        "table_name": "store",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "store_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".store_store_id_seq'::regclass)",
+            "primary_key": true,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "manager_staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "address_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "address.address_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "last_update",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": "now()",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [
+          "store_id"
+        ],
+        "foreign_keys": [
+          {
+            "column_name": "address_id",
+            "referenced_table": "address",
+            "referenced_column": "address_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_unq_manager_staff_id",
+            "columns": [
+              "manager_staff_id"
+            ],
+            "unique": true,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 2
+      },
+      {
+        "table_name": "payment_p2020_01",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "rental.rental_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "rental_id",
+            "referenced_table": "rental",
+            "referenced_column": "rental_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_payment_p2020_01_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_payment_p2020_01_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "payment_p2020_01_customer_id_idx",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 1157
+      },
+      {
+        "table_name": "payment_p2020_04",
+        "schema_name": "public",
+        "columns": [
+          {
+            "name": "payment_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": "nextval('\"public\".payment_payment_id_seq'::regclass)",
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": true,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "customer_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "customer.customer_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "staff_id",
+            "data_type": "SMALLINT",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "staff.staff_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "rental_id",
+            "data_type": "INTEGER",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": "rental.rental_id",
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "data_type": "NUMERIC(5, 2)",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": 5,
+            "scale": 2,
+            "description": null
+          },
+          {
+            "name": "payment_date",
+            "data_type": "TIMESTAMP",
+            "nullable": false,
+            "default_value": null,
+            "primary_key": false,
+            "foreign_key": null,
+            "unique": false,
+            "auto_increment": false,
+            "max_length": null,
+            "precision": null,
+            "scale": null,
+            "description": null
+          }
+        ],
+        "primary_keys": [],
+        "foreign_keys": [
+          {
+            "column_name": "customer_id",
+            "referenced_table": "customer",
+            "referenced_column": "customer_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "rental_id",
+            "referenced_table": "rental",
+            "referenced_column": "rental_id",
+            "on_delete": null,
+            "on_update": null
+          },
+          {
+            "column_name": "staff_id",
+            "referenced_table": "staff",
+            "referenced_column": "staff_id",
+            "on_delete": null,
+            "on_update": null
+          }
+        ],
+        "check_constraints": [],
+        "unique_constraints": [],
+        "indexes": [
+          {
+            "name": "idx_fk_payment_p2020_04_customer_id",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "idx_fk_payment_p2020_04_staff_id",
+            "columns": [
+              "staff_id"
+            ],
+            "unique": false,
+            "index_type": null
+          },
+          {
+            "name": "payment_p2020_04_customer_id_idx",
+            "columns": [
+              "customer_id"
+            ],
+            "unique": false,
+            "index_type": null
+          }
+        ],
+        "table_comment": null,
+        "row_count": 6754
+      }
+    ],
+    "custom_types": [
+      {
+        "type_name": "mpaa_rating",
+        "type_category": "enum",
+        "values": [
+          "G",
+          "PG",
+          "PG-13",
+          "R",
+          "NC-17"
+        ],
+        "base_type": null,
+        "constraints": null
+      },
+      {
+        "type_name": "year",
+        "type_category": "domain",
+        "values": null,
+        "base_type": "integer",
+        "constraints": [
+          "CHECK (VALUE >= 1901 AND VALUE <= 2155)"
+        ]
+      }
+    ],
+    "total_tables": 21,
+    "introspection_timestamp": "2026-05-01T20:56:16.958001",
+    "database_version": "PostgreSQL 14.22 (Ubuntu 14.22-0ubuntu0.22.04.1) on x86_64-pc-linux-gnu"
+  },
+  "snapshot_timestamp": "2026-05-01T20:56:16.958233",
+  "snapshot_type": "manual",
+  "notes": null
+}
